@@ -1,0 +1,31 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+html {
+    background: url(images/wood.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+main {
+    display: grid;
+    text-align: center;
+    justify-items: center;
+}
+.bookshelf {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.book {
+    background-color: white;
+    height: 228px;
+    width: 165px;
+    border: 1px solid black;
+}
