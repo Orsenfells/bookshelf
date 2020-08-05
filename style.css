@@ -21,11 +21,18 @@ main {
 .bookshelf {
     display: flex;
     flex-wrap: wrap;
-    
 }
 .book {
+    margin: 5px;
     background-color: white;
     height: 228px;
     width: 165px;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.newBook {
+    display: flex;
+    flex-direction: column;
 }
