@@ -1,9 +1,17 @@
 let myLibrary = [];
 let bookshelf = document.getElementById("bookshelf");
 let firstLaw = new Book("The Blade Itself", "Joe Abercrombie", "529 pages", "I have read");
-addBookToLibrary(firstLaw);
-let theWay = new Book("The Way of Kings", "Brandon Sanderson", "1007 pages", "I have read")
+let theWay = new Book("The Way of Kings", "Brandon Sanderson", "1007 pages", "I have read");
+let mansSearch = new Book("Man's Search for Meaning", "Victor Frankl", "200 pages", "I have read");
+let form = document.querySelector(".newBookForm");
+let section = document.querySelector("section");
+let newBookButton = document.getElementById("newBook");
 addBookToLibrary(theWay);
+addBookToLibrary(firstLaw);
+addBookToLibrary(mansSearch);
+window.onload = function() {
+    section.style.display = "none";
+}
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -13,11 +21,19 @@ function Book(title, author, pages, read) {
         return `${title} by ${author}, ${pages} pages, ${read}`;
     }
 }
-
 function addBookToLibrary(book) {
-    return myLibrary.push(book)
+    return myLibrary.push(book);
 }
-
+function showForm() {
+    section.style.display = "flex";
+    section.style.width = "100vw";
+    section.style.height = "100vh";
+}
+function hideForm(e) {
+    if(e.target.id === "section") {
+        section.style.display = "none";
+    }
+}
 
 function render() {
     for(let i = 0; i < myLibrary.length; i++) {
@@ -44,4 +60,8 @@ function render() {
         bookshelf.appendChild(book);
     }
 }
-render()
+
+section.addEventListener('click', hideForm)
+newBookButton.addEventListener('click', showForm);
+
+render();

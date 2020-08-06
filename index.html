@@ -7,14 +7,26 @@
         
         <main>
             <h1>Library</h1>
-            <form class="newBook" id="newBookForm">
-                <input type="text" placeholder="Title">
-                <input type="text" placeholder="author">
-                <input type="text" placeholder="pages">
-                <label>Have read</label>
-                <input type="radio"> 
-            </form>
-            <button>+</button>
+            <section id="section">
+                <form class="newBookForm">
+                    <fieldset> 
+                            <label for="title">Title</label>
+                            <input type="text" id="title" required>
+                        
+                            <label for="author" >Author</label>
+                            <input type="text" id="author" required>
+                       
+                            <label for="pages">Number of Pages</label>
+                            <input type="number" id="pages" required>
+                        
+                            <label for="read">Have you read it?</label>
+                            <input type="checkbox" id="read">
+                            
+                            <button type="submit">Add New Book</button>
+                    </fieldset>
+                </form>
+            </section>
+            <button id="newBook">+</button>
             <div class="bookshelf" id="bookshelf">
                 
             </div>

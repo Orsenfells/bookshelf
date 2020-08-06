@@ -32,7 +32,17 @@ main {
     flex-direction: column;
     justify-content: space-evenly;
 }
-.newBook {
+
+fieldset {
+    display: grid;
+    background: white;
+    border: 1px solid black;
+}
+section {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .25);
+    justify-content: center;
+    align-items: center;
     display: flex;
-    flex-direction: column;
+    
 }
