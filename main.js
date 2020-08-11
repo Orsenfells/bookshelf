@@ -67,6 +67,35 @@ function enter() {
 }
 section.addEventListener('click', hideForm);
 newBookButton.addEventListener('click', showForm);
-submit.addEventListener('click', enter);
+
+window.addEventListener('load', function() {
+    function sendData() {
+        const XHR = new XMLHttpRequest();
+
+        // Bind the FormData object and the form element
+        const FD = new FormData( form );
+
+        // Define what happens on successful data submission
+        XHR.addEventListener("load" , function(event) {
+            alert( event.target.responseText );
+        });
+
+        // Set up our request
+        XHR.open( "POST", "https://orsenfells.github.io/bookshelf/?");
+
+        // The data sent is what the user provided in the form
+        XHR.send(FD);
+    }
+
+    // Access the form element...
+    const form = document.getElementById("myForm");
+
+    // ...and take over its submit event.
+    form.addEventListener( "submit", function( event ) {
+        event.preventDefault();
+
+        sendData();
+    });
+});
 
 render();
