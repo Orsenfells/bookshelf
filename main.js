@@ -6,6 +6,7 @@ let mansSearch = new Book("Man's Search for Meaning", "Victor Frankl", "200 page
 let form = document.querySelector(".newBookForm");
 let section = document.querySelector("section");
 let newBookButton = document.getElementById("newBook");
+let submit = document.getElementById("submit");
 addBookToLibrary(theWay);
 addBookToLibrary(firstLaw);
 addBookToLibrary(mansSearch);
@@ -60,8 +61,12 @@ function render() {
         bookshelf.appendChild(book);
     }
 }
-
-section.addEventListener('click', hideForm)
+function enter() {
+    let title = document.getElementById("title").value;
+    console.log(title);
+}
+section.addEventListener('click', hideForm);
 newBookButton.addEventListener('click', showForm);
+submit.addEventListener('click', enter);
 
 render();
