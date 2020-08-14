@@ -46,3 +46,8 @@ section {
     display: flex;
     
 }
+.removeBook {
+    border: black 1px solid;
+    width: 40px;
+    align-self: center;
+}

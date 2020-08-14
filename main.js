@@ -1,15 +1,15 @@
 let myLibrary = [];
 let bookshelf = document.getElementById("bookshelf");
-let firstLaw = new Book("The Blade Itself", "Joe Abercrombie", "529 pages", "I have read");
-let theWay = new Book("The Way of Kings", "Brandon Sanderson", "1007 pages", "I have read");
+let firstLaw = new Book("The Blade Itself", "Joe Abercrombie", "529 pages", true);
+let theWay = new Book("The Way of Kings", "Brandon Sanderson", "1007 pages", true);
 let mansSearch = new Book("Man's Search for Meaning", "Victor Frankl", "200 pages", "I have read");
-let form = document.querySelector(".newBookForm");
+let form = document.getElementById("myForm");
 let section = document.querySelector("section");
 let newBookButton = document.getElementById("newBook");
 let submit = document.getElementById("submit");
 addBookToLibrary(theWay);
 addBookToLibrary(firstLaw);
-addBookToLibrary(mansSearch);
+
 window.onload = function() {
     section.style.display = "none";
 }
@@ -18,9 +18,6 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function() {
-        return `${title} by ${author}, ${pages} pages, ${read}`;
-    }
 }
 function addBookToLibrary(book) {
     return myLibrary.push(book);
@@ -43,22 +40,34 @@ function render() {
         let author = document.createElement("div");
         let pages = document.createElement("div");
         let read = document.createElement("div");
+        let remove = document.createElement("button");
         title.textContent = myLibrary[i].title;
         title.className = "title";
         author.textContent = myLibrary[i].author;
         author.className = "author";
         pages.textContent = myLibrary[i].pages;
         pages.className = "pages"
-        read.textContent = myLibrary[i].read;
-        read.className = "read";
-        
+        if(myLibrary[i].read == true ) {
+            read.textContent = "I have read";
+        } else {
+            read.textContent = "I have not read";
+        }
+        remove.textContent = "x";
+        remove.className = "removeBook";
+        book.appendChild(remove);
         book.appendChild(title);
         book.appendChild(author);
         book.appendChild(pages);
         book.appendChild(read);
 
         book.className = "book"
+        book.dataset.indexNumber = i;
         bookshelf.appendChild(book);
+        
+        remove.addEventListener('click', function() {
+            bookshelf.removeChild(book);
+            myLibrary.pop(myLibrary[i]);
+        })
     }
 }
 function enter() {
@@ -68,34 +77,19 @@ function enter() {
 section.addEventListener('click', hideForm);
 newBookButton.addEventListener('click', showForm);
 
-window.addEventListener('load', function() {
-    function sendData() {
-        const XHR = new XMLHttpRequest();
-
-        // Bind the FormData object and the form element
-        const FD = new FormData( form );
-
-        // Define what happens on successful data submission
-        XHR.addEventListener("load" , function(event) {
-            alert( event.target.responseText );
-        });
-
-        // Set up our request
-        XHR.open( "POST", "https://orsenfells.github.io/bookshelf/?");
-
-        // The data sent is what the user provided in the form
-        XHR.send(FD);
-    }
-
-    // Access the form element...
-    const form = document.getElementById("myForm");
-
-    // ...and take over its submit event.
-    form.addEventListener( "submit", function( event ) {
-        event.preventDefault();
-
-        sendData();
-    });
-});
-
+function renderNewBook() {
+    bookshelf.textContent = "";
+    let title = document.getElementById("title");
+    let author = document.getElementById("author");
+    let pages = document.getElementById("pages");
+    let read = document.getElementById("read");
+    myLibrary.push(new Book(title.value, author.value, pages.value, read.checked));
+    section.style.display = "none"
+    render();
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    read.checked = false;
+}
+submit.addEventListener('click', renderNewBook)
 render();
